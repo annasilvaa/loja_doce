@@ -1,65 +1,64 @@
-import DoceModel from "../Models/DoceModel.js";
+import CategoriaModel from "../Models/CategoriaModel.js";
 
-class DoceController{
+class CategoriaController {
     constructor() {
     }
     create(req, res){
         const nome = req.body.nome;
-        const id_categoria = req.body.id_categoria;
-        DoceModel.create(nome, id_categoria).then(
+        CategoriaModel.create(nome).then(
             resposta =>{
-                console.debug("Inserindo um doce...");
+                console.debug("Inserindo um categoria...");
                 res.status(resposta[0]).json(resposta[1])
             }
         ).catch()
         resposta =>{
-            console.debug("Erro: Inserindo um doce.");
+            console.debug("Erro: Inserindo um categoria.");
             res.status(resposta[0]).json(resposta[1])
         }
     }
     read(req, res){
-       DoceModel.read().then(
+       CategoriaModel.read().then(
         resposta =>{
-            console.debug("Mostrando doce...")
+            console.debug("Mostrando categoria...")
             res.status(resposta[0]).json(resposta[1])
         }
        ).catch(
         resposta =>{
-            console.debug("Erro ao mostrar doce.")
+            console.debug("Erro ao mostrar categoria.")
             res.status(resposta[0]).json(resposta[1])
         }
        );
     }
 
     update(req, res){
-        const id_doce= req.params.id_doce;
+        const id_categoria= req.params.id_categoria;
         const nome = req.body.nome;
 
-        DoceModel.update(id_doce,nome).then(
+        CategoriaModel.update(id_categoria,nome).then(
             resposta =>{
-                console.debug("Atualizando doce...")
+                console.debug("Atualizando categoria...")
                 res.status(resposta[0]).json(resposta[1])
             }
         ).catch(
             resposta=>{
-                console.debug("Erro atualizando doce.")
+                console.debug("Erro atualizando categoria.")
                 res.status(resposta[0]).json(resposta[1])
             }
             );
     }
     
     delete(req,res){
-        const id_doce = req.params.id_doce;
+        const id_categoria = req.params.id_categoria;
 
-        DoceModel.delete(id_doce).then(
+        CategoriaModel.delete(id_categoria).then(
             resposta =>{
-                console.debug("Deletando um doce...");
+                console.debug("Deletando uma categoria...");
                 res.status(resposta[0]).json(resposta[1])
             }
         ).catch(
             resposta =>{
                 console.debug(resposta)
-                console.debug("Erro ao deletar um doce.");
+                console.debug("Erro ao deletar uma categoria.");
                 res.status(resposta[0]).json(resposta[1])
             }
         )
@@ -67,4 +66,4 @@ class DoceController{
     }
 }
 
-export default new DoceController();
+export default new CategoriaController();

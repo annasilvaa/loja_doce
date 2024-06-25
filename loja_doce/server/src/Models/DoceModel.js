@@ -6,15 +6,15 @@ class DoceModel{
         this.conexao = mysql.createConnection(config.db);
     }
 
-    create(nome){
-        let sql = `INSERT INTO doce (nome) VALUES("${nome}");`;
+    create(nome, id_categoria){
+        let sql = `INSERT INTO doce (nome) VALUES("${nome}","${id_categoria}");`;
 
         return new Promise((resolve, reject)=>{
             this.conexao.query(sql,(erro, retorno)=>{
                 if (erro){
                     reject([400, erro])
                 }
-                resolve([201, "Doce Adicionado"])
+                resolve([201, "Doce Adicionado com Sucesso"])
             })
         });
     }
@@ -38,9 +38,10 @@ class DoceModel{
         return new Promise((resolve, reject)=>{
             this.conexao.query(sql, (erro, retorno)=>{
                 if (erro){
+                    console.debug(erro)
                     reject([400, erro])
                 } else if (retorno.affectedRows > 0){
-                    resolve([200, "Doce Atualizado"])
+                    resolve([200, "Doce Atualizado com Sucesso"])
                 } else{
                     resolve([404, "Doce não encontrado!"])
                 }
